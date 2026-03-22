@@ -1,0 +1,19 @@
+{% if song and song.user_id == user.id %}
+<form action="/update_song" method="POST" class="card border-0 shadow-sm p-3 mb-3 border-top border-warning border-3">
+    <h6 class="text-warning mb-3">Edit Song</h6>
+    <input type="hidden" name="song_id" value="{{ song.id }}">
+    <div class="mb-2">
+        <label class="form-label text-muted small">Name</label>
+        <input type="text" class="form-control form-control-sm" name="name" value="{{ song.name }}" required>
+    </div>
+    <div class="mb-2">
+        <label class="form-label text-muted small">Lyrics</label>
+        <textarea class="form-control form-control-sm" name="lyrics" rows="2">{{ song.lyrics }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label text-muted small">Duration</label>
+        <input type="text" class="form-control form-control-sm" name="duration" value="{{ song.duration }}">
+    </div>
+    <button type="submit" class="btn btn-warning btn-sm w-100 text-white">Save</button>
+</form>
+{% endif %}

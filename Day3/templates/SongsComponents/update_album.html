@@ -1,0 +1,19 @@
+{% if selected_album and selected_album.user_id == user.id %}
+<form action="/update_album" method="POST" class="card border-0 shadow-sm p-3 mb-3 border-top border-warning border-3">
+    <h6 class="text-warning mb-3">Edit Album</h6>
+    <input type="hidden" name="album_id" value="{{ selected_album.id }}">
+    <div class="mb-2">
+        <label class="form-label text-muted small">Album Name</label>
+        <input type="text" class="form-control form-control-sm" name="name" value="{{ selected_album.name }}" required>
+    </div>
+    <div class="mb-2">
+        <label class="form-label text-muted small">Genre</label>
+        <input type="text" class="form-control form-control-sm" name="genre" value="{{ selected_album.genre }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label text-muted small">Artist</label>
+        <input type="text" class="form-control form-control-sm" name="artist" value="{{ selected_album.artist }}">
+    </div>
+    <button type="submit" class="btn btn-warning btn-sm w-100 text-white">Save</button>
+</form>
+{% endif %}

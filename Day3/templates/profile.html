@@ -1,0 +1,23 @@
+{% extends './layouts/bootstrap.html' %}
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+{% include './BasicComponents/navbar.html' %}
+{% include './BasicComponents/flash.html' %}
+
+<div class="container py-4">
+    <div class="row g-4 justify-content-center">
+
+        <div class="col-md-4">
+            {% include './ProfileComponents/user_details.html' %}
+        </div>
+        <div class="col-md-4">
+            {% include './ProfileComponents/update_user_details.html' %}
+        </div>
+        <div class="col-md-4">
+            {% include './ProfileComponents/user_stats.html' %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

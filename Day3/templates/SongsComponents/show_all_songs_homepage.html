@@ -1,0 +1,61 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for song in songs %}
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+            <img src="{{url_for('static', filename='SongThumbnails/songthumbnail.jpg')}}" class="card-img-top"
+                style="height: 140px; object-fit: cover;" alt="Thumbnail">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-1">
+                    <h5 class="card-title text-primary text-truncate m-0">{{song.name}}</h5>
+                    <div class="text-warning small text-nowrap" title="Average Rating: {{song.rating}} / 5">
+                        {% for i in range(5) %}
+                        {% if i < song.rating %}&starf;{% else %}&star;{% endif %} {% endfor %} </div>
+                    </div>
+                    <p class="card-text text-muted small mb-3 text-truncate">{{song.lyrics}}</p>
+                    <a href="?song_id={{song.id}}" class="btn btn-outline-primary w-100 mb-3">Play Song</a>
+
+                    <div class="d-flex mb-2 justify-content-between align-items-center">
+                        {% if user %}
+                        <form action="{{ url_for('rate_song') }}" method="POST" class="d-flex align-items-center">
+                            <input type="hidden" name="song_id" value="{{song.id}}">
+                            <select name="rating" class="form-select border-warning text-warning me-2 shadow-none"
+                                required>
+                                <option value="">Rate</option>
+                                <option value="5">5 &starf;</option>
+                                <option value="4">4 &starf;</option>
+                                <option value="3">3 &starf;</option>
+                                <option value="2">2 &starf;</option>
+                                <option value="1">1 &starf;</option>
+                            </select>
+                            <button type="submit" class="btn btn-warning text-white shadow-none">Go</button>
+                        </form>
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center pb-3">
+                    {% if user and user.playlists %}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-info dropdown-toggle shadow-none" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            + Playlist
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-sm shadow-sm">
+                            {% for playlist in user.playlists %}
+                            <li><a class="dropdown-item"
+                                    href="{{ url_for('add_song_to_playlist', song_id=song.id, playlist_id=playlist.id) }}">{{playlist.name}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% else %}
+                    <span style="font-size:0.75rem;"></span>
+                    {% endif %}
+                    <small class="text-muted" style="font-size:0.75rem;">{{song.duration or "Unspecified"}}</small>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 py-4 text-center text-muted">No songs available.</div>
+        {% endfor %}
+    </div>

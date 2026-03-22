@@ -1,0 +1,20 @@
+<form action="/upload_song" method="POST" enctype="multipart/form-data" class="card border-0 shadow-sm p-3 mb-3">
+    <h6 class="text-primary mb-3">Upload Song</h6>
+    <div class="mb-2">
+        <label class="form-label text-muted small">Song Name</label>
+        <input type="text" class="form-control form-control-sm" name="name" required>
+    </div>
+    <div class="mb-2">
+        <label class="form-label text-muted small">Lyrics</label>
+        <textarea class="form-control form-control-sm" name="lyrics" rows="2"></textarea>
+    </div>
+    <div class="mb-2">
+        <label class="form-label text-muted small">Duration (e.g. 3:45)</label>
+        <input type="text" class="form-control form-control-sm" name="duration">
+    </div>
+    <div class="mb-3">
+        <label class="form-label text-muted small">Audio File (.mp3)</label>
+        <input class="form-control form-control-sm" type="file" name="song_file" accept=".mp3" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm w-100">Upload</button>
+</form>

@@ -1,0 +1,26 @@
+<div class="card shadow-sm border-0 mb-4 rounded-3">
+    <div class="card-body">
+        <h4 class="card-title text-success mb-3">Update Profile</h4>
+        <form action="{{ url_for('update_profile') }}" method="POST" class="text-start">
+            <div class="mb-3">
+                <label for="username" class="form-label text-muted small">Username</label>
+                <input type="text" class="form-control form-control-sm" id="username" name="username"
+                    value="{{ user.username }}">
+            </div>
+            <div class="mb-3">
+                <label for="old_password" class="form-label text-muted small">Old Password</label>
+                <input type="password" class="form-control form-control-sm" id="old_password" name="old_password">
+            </div>
+            <div class="mb-3">
+                <label for="new_password" class="form-label text-muted small">New Password</label>
+                <input type="password" class="form-control form-control-sm" id="new_password" name="new_password">
+            </div>
+            <div class="mb-3">
+                <label for="confirm_new_password" class="form-label text-muted small">Confirm New</label>
+                <input type="password" class="form-control form-control-sm" id="confirm_new_password"
+                    name="confirm_new_password">
+            </div>
+            <button type="submit" class="btn btn-success btn-sm w-100 mt-2">Update</button>
+        </form>
+    </div>
+</div>

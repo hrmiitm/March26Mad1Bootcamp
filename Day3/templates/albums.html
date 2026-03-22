@@ -1,0 +1,28 @@
+{% extends './layouts/bootstrap.html' %}
+{% block title %}Albums{% endblock %}
+
+{% block body %}
+{% include './BasicComponents/navbar.html' %}
+{% include './BasicComponents/flash.html' %}
+
+<div class="container-fluid px-3 py-2">
+    <div class="row g-3" style="height: calc(100vh - 80px);">
+
+        <div class="col-md-3 h-100 overflow-y-auto border-end">
+            {% include './SongsComponents/upload_album.html' %}
+            {% include './SongsComponents/update_album.html' %}
+        </div>
+
+        <div class="col-md-6 h-100 overflow-y-auto">
+            <h5 class="text-secondary mb-3">All Albums</h5>
+            {% include './SongsComponents/show_all_albums_creator.html' %}
+        </div>
+
+        <div class="col-md-3 h-100 overflow-y-auto border-start">
+            <h5 class="text-secondary mb-3">Now Playing</h5>
+            {% include './SongsComponents/playing_song.html' %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}
