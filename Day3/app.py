@@ -448,18 +448,22 @@ def update_profile():
 def add_song_to_playlist():
     user = get_current_user()
 
+    # Get the SONGID, PLAYLIST ID ====> (2,5)
     song_id = request.args.get('song_id')
     playlist_id = request.args.get('playlist_id')
 
+    # I GET THE OBJECTS ===> (<songObj>, <playlistObj>)
     song = Song.query.filter_by(id=song_id).first()
     playlist = Playlist.query.filter_by(id=playlist_id).first()
+
+    # Validation
     if not song:
         flash('Song not found', 'danger')
     elif not playlist:
         flash('Playlist not found', 'danger')
     elif playlist.user_id != user.id:
         flash('You are not authorized to add this song to this playlist', 'danger')
-    else:
+    else:   
         playlist.songs.append(song)
         db.session.commit()
         flash('Song added to playlist successfully', 'success')
