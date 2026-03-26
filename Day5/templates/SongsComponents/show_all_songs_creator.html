@@ -1,0 +1,29 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for song in songs %}
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+            <img src="{{url_for('static', filename='SongThumbnails/songthumbnail.jpg')}}" class="card-img-top"
+                style="height: 140px; object-fit: cover;" alt="Thumbnail">
+            <div class="card-body">
+                <h5 class="card-title text-primary mb-1 text-truncate">{{song.name}}</h5>
+                <p class="card-text text-muted small mb-3 text-truncate">{{song.lyrics}}</p>
+                <div class="d-flex gap-2">
+                    <a href="?song_id={{song.id}}" class="btn btn-outline-primary btn-sm flex-fill">Play / Edit</a>
+
+
+                    <a href="{{ url_for('delete_song', song_id=song.id) }}" class="btn btn-outline-danger btn-sm"
+                        onclick="return confirm('Are you sure you want to delete this song?');">Delete</a>
+
+
+                        
+                </div>
+            </div>
+            <div class="card-footer bg-transparent border-0 text-end pb-3">
+                <small class="text-muted">Uploaded: {{song.date}}</small>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 py-4 text-center text-muted">You haven't uploaded any songs yet.</div>
+    {% endfor %}
+</div>

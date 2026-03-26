@@ -1,0 +1,13 @@
+{% if selected_playlist and selected_playlist.user_id == user.id %}
+<form action="/update_playlist" method="POST"
+    class="card border-0 shadow-sm mb-3 p-3 border-top border-warning border-3">
+    <h6 class="text-warning mb-3">Edit Playlist</h6>
+    <input type="hidden" name="playlist_id" value="{{ selected_playlist.id }}">
+    <div class="mb-2">
+        <label class="form-label text-muted small">Playlist Name</label>
+        <input type="text" class="form-control form-control-sm" name="name" value="{{ selected_playlist.name }}"
+            required>
+    </div>
+    <button type="submit" class="btn btn-warning btn-sm w-100 text-white mt-1">Save Changes</button>
+</form>
+{% endif %}

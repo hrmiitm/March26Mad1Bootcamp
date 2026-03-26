@@ -1,0 +1,26 @@
+{% extends './layouts/bootstrap.html' %}
+{% block title %}Admin — Users & Creators{% endblock %}
+
+{% block body %}
+{% include './AdminComponents/navbar.html' %}
+{% include './BasicComponents/flash.html' %}
+
+<div class="container-fluid px-4 py-4">
+
+    <!-- Page Header -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h4 class="fw-bold mb-1">👥 Users & Creators</h4>
+            <p class="text-muted small mb-0">Manage creator access — blacklist or whitelist creators</p>
+        </div>
+        <div class="d-flex gap-2">
+            <span class="badge bg-success rounded-pill px-3 py-2">{{ whitelisted_creators | length }} Active</span>
+            <span class="badge bg-danger rounded-pill px-3 py-2">{{ blacklisted_creators | length }} Blacklisted</span>
+            <span class="badge bg-secondary rounded-pill px-3 py-2">{{ users | length }} Total Users</span>
+        </div>
+    </div>
+
+    {% include './AdminComponents/users_management.html' %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+<div class="card shadow-sm border-0 mb-4 rounded-3 bg-light">
+    <div class="card-body">
+        <h4 class="card-title text-info mb-3">User Statistics</h4>
+        {% if stats %}
+        <div class="row align-items-center mb-3">
+            <div class="col-8 text-start text-muted"><strong>Total Songs</strong></div>
+            <div class="col-4 text-end"><span class="badge bg-primary rounded-pill">{{ stats.total_songs }}</span></div>
+        </div>
+        <div class="row align-items-center mb-3">
+            <div class="col-8 text-start text-muted"><strong>Total Albums</strong></div>
+            <div class="col-4 text-end"><span class="badge bg-success rounded-pill">{{ stats.total_albums }}</span>
+            </div>
+        </div>
+        <div class="row align-items-center mb-2">
+            <div class="col-8 text-start text-muted"><strong>Total Playlists</strong></div>
+            <div class="col-4 text-end"><span class="badge bg-info rounded-pill">{{ stats.total_playlists }}</span>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-muted">No statistics available.</p>
+        {% endif %}
+        {% if user.isCreator == False %}
+        <div class="row align-items-center mb-2">
+            <div class="col-8 text-start text-muted">
+                <h4>You are Not Creator <a href="{{ url_for('make_creator') }}">
+                        <button type="button" class="btn btn-warning">Make me Creator</button>
+                    </a></h4>
+            </div>
+
+        </div>
+        {% endif %}
+    </div>
+</div>

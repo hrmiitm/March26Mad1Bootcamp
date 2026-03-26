@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container-fluid px-4">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="adminNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/admin' %}active text-white{% endif %}" href="/admin">
+                        📊 Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/admin/songs' %}active text-white{% endif %}"
+                        href="/admin/songs">
+                        🎵 Songs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/admin/users' %}active text-white{% endif %}"
+                        href="/admin/users">
+                        👥 Users & Creators
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/admin/users' %}active text-white{% endif %}"
+                        href="/logout">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+            {% if user %}
+            <span class="navbar-text text-secondary small">
+                <span class="text-danger fw-semibold">⚡ Admin:</span>
+                <strong class="text-light ms-1">{{ user.username }}</strong>
+            </span>
+            {% endif %}
+        </div>
+    </div>
+</nav>

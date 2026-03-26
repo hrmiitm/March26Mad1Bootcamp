@@ -1,0 +1,153 @@
+<!-- ===== CREATORS MANAGEMENT ===== -->
+<div class="row g-4">
+
+    <!-- WHITELISTED CREATORS -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div
+                class="card-header bg-success bg-opacity-10 border-0 d-flex align-items-center justify-content-between py-3 px-4">
+                <div>
+                    <h6 class="mb-0 fw-semibold text-success">✅ Whitelisted Creators</h6>
+                    <small class="text-muted">Active creators who can upload content</small>
+                </div>
+                <span class="badge bg-success rounded-pill">{{ whitelisted_creators | length }}</span>
+            </div>
+            <div class="card-body p-0">
+                {% if whitelisted_creators %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4" style="width:40px;">#</th>
+                                <th>Creator</th>
+                                <th>Email</th>
+                                <th class="text-center">Songs</th>
+                                <th class="text-center">Albums</th>
+                                <th class="text-end pe-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for creator in whitelisted_creators %}
+                            <tr>
+                                <td class="ps-4 text-muted small">{{ loop.index }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="rounded-circle bg-success bg-opacity-15 d-flex align-items-center justify-content-center"
+                                            style="width:36px;height:36px;">
+                                            <span class="text-success fw-bold small">{{ creator.username[0].upper()
+                                                }}</span>
+                                        </div>
+                                        <div>
+                                            <div class="fw-semibold text-dark">{{ creator.username }}</div>
+                                            <small class="text-muted">ID: {{ creator.id }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-muted small">{{ creator.email }}</td>
+                                <td class="text-center">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill">{{
+                                        creator.songs | length }}</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill">{{
+                                        creator.albums | length }}</span>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <a href="/admin/blacklist_creator?creator_id={{ creator.id }}"
+                                        class="btn btn-sm btn-outline-danger px-3"
+                                        onclick="return confirm('Blacklist {{ creator.username }}?')">
+                                        🚫 Blacklist
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-5 text-muted">
+                    <div style="font-size:2rem;">✅</div>
+                    <p class="mb-0 small">No whitelisted creators</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- BLACKLISTED CREATORS -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div
+                class="card-header bg-danger bg-opacity-10 border-0 d-flex align-items-center justify-content-between py-3 px-4">
+                <div>
+                    <h6 class="mb-0 fw-semibold text-danger">🚫 Blacklisted Creators</h6>
+                    <small class="text-muted">Suspended creators — content still visible to admin</small>
+                </div>
+                <span class="badge bg-danger rounded-pill">{{ blacklisted_creators | length }}</span>
+            </div>
+            <div class="card-body p-0">
+                {% if blacklisted_creators %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4" style="width:40px;">#</th>
+                                <th>Creator</th>
+                                <th>Email</th>
+                                <th class="text-center">Songs</th>
+                                <th class="text-center">Albums</th>
+                                <th class="text-end pe-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for creator in blacklisted_creators %}
+                            <tr class="table-danger table-danger bg-opacity-25">
+                                <td class="ps-4 text-muted small">{{ loop.index }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="rounded-circle bg-danger bg-opacity-15 d-flex align-items-center justify-content-center"
+                                            style="width:36px;height:36px;">
+                                            <span class="text-danger fw-bold small">{{ creator.username[0].upper()
+                                                }}</span>
+                                        </div>
+                                        <div>
+                                            <div class="fw-semibold text-dark">
+                                                {{ creator.username }}
+                                                <span class="badge bg-danger ms-1"
+                                                    style="font-size:0.6rem;">Suspended</span>
+                                            </div>
+                                            <small class="text-muted">ID: {{ creator.id }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-muted small">{{ creator.email }}</td>
+                                <td class="text-center">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill">{{
+                                        creator.songs | length }}</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill">{{
+                                        creator.albums | length }}</span>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <a href="/admin/whitelist_creator?creator_id={{ creator.id }}"
+                                        class="btn btn-sm btn-outline-success px-3">
+                                        ✅ Whitelist
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-5 text-muted">
+                    <div style="font-size:2rem;">🎉</div>
+                    <p class="mb-0 small">No blacklisted creators</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
