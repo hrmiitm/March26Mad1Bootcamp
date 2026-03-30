@@ -1,0 +1,15 @@
+<div class="card shadow-sm border-0 mb-4 rounded-3">
+    <div class="card-body">
+        <h4 class="card-title text-primary mb-3">User Details</h4>
+        <ul class="list-group list-group-flush text-start">
+            <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+            <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+            <li class="list-group-item">
+                <strong>Role:</strong>
+                {% if user.isAdmin %}Admin
+                {% elif user.isCreator %}Creator
+                {% else %}User{% endif %}
+            </li>
+        </ul>
+    </div>
+</div>

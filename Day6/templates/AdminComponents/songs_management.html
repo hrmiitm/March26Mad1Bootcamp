@@ -1,0 +1,185 @@
+<!-- ===== SONGS MANAGEMENT ===== -->
+<div class="row g-4">
+
+    <!-- WHITELISTED SONGS -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div
+                class="card-header bg-success bg-opacity-10 border-0 d-flex align-items-center justify-content-between py-3 px-4">
+                <div>
+                    <h6 class="mb-0 fw-semibold text-success">✅ Active Songs</h6>
+                    <small class="text-muted">Songs available for playback on the platform</small>
+                </div>
+                <span class="badge bg-success rounded-pill">{{ whitelisted_songs | length }}</span>
+            </div>
+            <div class="card-body p-0">
+                {% if whitelisted_songs %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4" style="width:40px;">#</th>
+                                <th>Song</th>
+                                <th>Creator</th>
+                                <th class="text-center">Rating</th>
+                                <th class="text-center">Duration</th>
+                                <th class="text-center">Date Added</th>
+                                <th class="text-center">Albums</th>
+                                <th class="text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in whitelisted_songs %}
+                            <tr>
+                                <td class="ps-4 text-muted small">{{ loop.index }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="rounded-circle bg-success bg-opacity-15 d-flex align-items-center justify-content-center"
+                                            style="width:36px;height:36px;flex-shrink:0;">
+                                            <span class="text-success fw-bold small">🎵</span>
+                                        </div>
+                                        <div>
+                                            <div class="fw-semibold text-dark">{{ s.name }}</div>
+                                            <small class="text-muted">ID: {{ s.id }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="small text-muted">{{ s.user.username if s.user else 'Unknown' }}</span>
+                                </td>
+                                <td class="text-center">
+                                    {% set r = s.rating %}
+                                    {% if r >= 4 %}
+                                    <span class="badge bg-warning text-dark rounded-pill">⭐ {{ r }}/5</span>
+                                    {% elif r >= 2 %}
+                                    <span class="badge bg-info text-dark rounded-pill">⭐ {{ r }}/5</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary rounded-pill">⭐ {{ r }}/5</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center small text-muted">{{ s.duration if s.duration else '—' }}</td>
+                                <td class="text-center small text-muted">{{ s.date if s.date else '—' }}</td>
+                                <td class="text-center">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill">{{ s.albums |
+                                        length }}</span>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <div class="d-flex gap-1 justify-content-end flex-wrap">
+                                        <!-- Play button -->
+                                        <a href="/admin/songs?song_id={{ s.id }}"
+                                            class="btn btn-sm btn-outline-primary px-2" title="Play">▶ Play</a>
+                                        <!-- Blacklist -->
+                                        <a href="/admin/blacklist_song?song_id={{ s.id }}"
+                                            class="btn btn-sm btn-outline-warning px-2"
+                                            onclick="return confirm('Blacklist {{ s.name }}?')" title="Blacklist">🚫</a>
+                                        <!-- Delete -->
+                                        <a href="/admin/delete_song?song_id={{ s.id }}"
+                                            class="btn btn-sm btn-outline-danger px-2"
+                                            onclick="return confirm('Delete {{ s.name }} permanently?')"
+                                            title="Delete">🗑</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-5 text-muted">
+                    <div style="font-size:2rem;">🎵</div>
+                    <p class="mb-0 small">No active songs found</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- BLACKLISTED SONGS -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div
+                class="card-header bg-danger bg-opacity-10 border-0 d-flex align-items-center justify-content-between py-3 px-4">
+                <div>
+                    <h6 class="mb-0 fw-semibold text-danger">🚫 Blacklisted Songs</h6>
+                    <small class="text-muted">Suspended songs — not visible to regular users</small>
+                </div>
+                <span class="badge bg-danger rounded-pill">{{ blacklisted_songs | length }}</span>
+            </div>
+            <div class="card-body p-0">
+                {% if blacklisted_songs %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4" style="width:40px;">#</th>
+                                <th>Song</th>
+                                <th>Creator</th>
+                                <th class="text-center">Rating</th>
+                                <th class="text-center">Duration</th>
+                                <th class="text-center">Date Added</th>
+                                <th class="text-center">Albums</th>
+                                <th class="text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in blacklisted_songs %}
+                            <tr class="table-danger bg-opacity-25">
+                                <td class="ps-4 text-muted small">{{ loop.index }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="rounded-circle bg-danger bg-opacity-15 d-flex align-items-center justify-content-center"
+                                            style="width:36px;height:36px;flex-shrink:0;">
+                                            <span class="text-danger fw-bold small">🎵</span>
+                                        </div>
+                                        <div>
+                                            <div class="fw-semibold text-dark">
+                                                {{ s.name }}
+                                                <span class="badge bg-danger ms-1"
+                                                    style="font-size:0.6rem;">Blocked</span>
+                                            </div>
+                                            <small class="text-muted">ID: {{ s.id }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="small text-muted">{{ s.user.username if s.user else 'Unknown' }}</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-secondary rounded-pill">⭐ {{ s.rating }}/5</span>
+                                </td>
+                                <td class="text-center small text-muted">{{ s.duration if s.duration else '—' }}</td>
+                                <td class="text-center small text-muted">{{ s.date if s.date else '—' }}</td>
+                                <td class="text-center">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill">{{ s.albums |
+                                        length }}</span>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <div class="d-flex gap-1 justify-content-end flex-wrap">
+                                        <!-- Play button -->
+                                        <a href="/admin/songs?song_id={{ s.id }}"
+                                            class="btn btn-sm btn-outline-primary px-2" title="Play">▶ Play</a>
+                                        <!-- Whitelist -->
+                                        <a href="/admin/whitelist_song?song_id={{ s.id }}"
+                                            class="btn btn-sm btn-outline-success px-2">✅ Whitelist</a>
+                                        <!-- Delete -->
+                                        <a href="/admin/delete_song?song_id={{ s.id }}"
+                                            class="btn btn-sm btn-outline-danger px-2"
+                                            onclick="return confirm('Delete {{ s.name }} permanently?')">🗑 Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="text-center py-5 text-muted">
+                    <div style="font-size:2rem;">🎉</div>
+                    <p class="mb-0 small">No blacklisted songs</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>

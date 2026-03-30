@@ -1,0 +1,40 @@
+<div class="d-flex flex-column gap-5">
+    {% for playlist in playlists %}
+    <div class="playlist-section">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 border-bottom pb-2">
+            <h5 class="text-info m-0">{{playlist.name}}</h5>
+            <div class="d-flex gap-2">
+                <a href="?playlist_id={{playlist.id}}" class="btn btn-outline-warning btn-sm">Edit</a>
+                <a href="{{ url_for('delete_playlist', playlist_id=playlist.id) }}"
+                    class="btn btn-outline-danger btn-sm" onclick="return confirm('Delete this playlist?');">Delete</a>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for song in playlist.songs %}
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0 bg-light">
+                    <img src="{{url_for('static', filename='SongThumbnails/songthumbnail.jpg')}}" class="card-img-top"
+                        style="height: 120px; object-fit: cover;" alt="Thumbnail">
+                    <div class="card-body">
+                        <h6 class="card-title text-primary mb-1 text-truncate">{{song.name}}</h6>
+                        <div class="d-flex gap-2 mt-3 text-center">
+                            <a href="?song_id={{song.id}}" class="btn btn-primary btn-sm flex-fill">Play</a>
+                            <a href="{{ url_for('remove_song_from_playlist', song_id=song.id, playlist_id=playlist.id) }}"
+                                class="btn btn-outline-danger btn-sm" title="Remove from playlist">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12 py-3 text-muted small text-center w-100 bg-light rounded">Playlist is empty. Add songs
+                from your library.</div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center text-muted py-5 bg-light rounded">
+        <div><span style="font-size: 2rem;">💽</span></div>
+        You haven't created any playlists yet.
+    </div>
+    {% endfor %}
+</div>

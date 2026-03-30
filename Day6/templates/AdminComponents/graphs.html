@@ -1,0 +1,64 @@
+<!-- ===== ADMIN STATS GRAPHS ===== -->
+<div class="row g-4">
+
+    <!-- User Distribution -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white border-0 py-3 px-4">
+                <h6 class="mb-0 fw-semibold text-dark">👥 User Distribution</h6>
+                <small class="text-muted">Users vs Creators vs Admins</small>
+            </div>
+            <div class="card-body text-center p-3">
+                <img src="/static/graphs/user_distribution.png" alt="User Distribution" class="img-fluid rounded"
+                    style="max-height:260px; object-fit:contain;"
+                    onerror="this.src='';this.parentElement.innerHTML='<div class=\'text-muted py-4\'>📊 Graph not available yet</div>'">
+            </div>
+        </div>
+    </div>
+
+    <!-- Song Status -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white border-0 py-3 px-4">
+                <h6 class="mb-0 fw-semibold text-dark">🎵 Song Status</h6>
+                <small class="text-muted">Active vs Blacklisted songs</small>
+            </div>
+            <div class="card-body text-center p-3">
+                <img src="/static/graphs/song_status.png" alt="Song Status" class="img-fluid rounded"
+                    style="max-height:260px; object-fit:contain;"
+                    onerror="this.src='';this.parentElement.innerHTML='<div class=\'text-muted py-4\'>📊 Graph not available yet</div>'">
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Rated Songs -->
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white border-0 py-3 px-4">
+                <h6 class="mb-0 fw-semibold text-dark">⭐ Top Rated Songs</h6>
+                <small class="text-muted">Highest rated songs by average user rating</small>
+            </div>
+            <div class="card-body text-center p-3">
+                <img src="/static/graphs/top_rated_songs.png" alt="Top Rated Songs" class="img-fluid rounded"
+                    style="max-height:280px; object-fit:contain;"
+                    onerror="this.src='';this.parentElement.innerHTML='<div class=\'text-muted py-4\'>📊 Graph not available yet</div>'">
+            </div>
+        </div>
+    </div>
+
+    <!-- Songs Per Creator -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white border-0 py-3 px-4">
+                <h6 class="mb-0 fw-semibold text-dark">🏆 Songs Per Creator</h6>
+                <small class="text-muted">Content output by creator</small>
+            </div>
+            <div class="card-body text-center p-3">
+                <img src="/static/graphs/songs_per_creator.png" alt="Songs Per Creator" class="img-fluid rounded"
+                    style="max-height:280px; object-fit:contain;"
+                    onerror="this.src='';this.parentElement.innerHTML='<div class=\'text-muted py-4\'>📊 Graph not available yet</div>'">
+            </div>
+        </div>
+    </div>
+
+</div>

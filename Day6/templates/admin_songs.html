@@ -1,0 +1,41 @@
+{% extends './layouts/bootstrap.html' %}
+{% block title %}Admin — Songs Management{% endblock %}
+
+{% block body %}
+{% include './AdminComponents/navbar.html' %}
+{% include './BasicComponents/flash.html' %}
+
+<div class="container-fluid px-4 py-4">
+
+    <!-- Page Header -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h4 class="fw-bold mb-1">🎵 Songs Management</h4>
+            <p class="text-muted small mb-0">Blacklist, whitelist, play or delete songs on the platform</p>
+        </div>
+        <div class="d-flex gap-2">
+            <span class="badge bg-success rounded-pill px-3 py-2">{{ whitelisted_songs | length }} Active</span>
+            <span class="badge bg-danger rounded-pill px-3 py-2">{{ blacklisted_songs | length }} Blacklisted</span>
+        </div>
+    </div>
+
+    <!-- Two-column layout: tables on left, player on right -->
+    <div class="row g-4">
+
+        <!-- Songs Tables -->
+        <div class="col-lg-8 col-xl-9">
+            {% include './AdminComponents/songs_management.html' %}
+        </div>
+
+        <!-- Now Playing Player -->
+        <div class="col-lg-4 col-xl-3">
+            <div class="sticky-top" style="top: 1rem;">
+                <h6 class="fw-semibold text-muted mb-2 small text-uppercase">▶ Now Playing</h6>
+                {% include './SongsComponents/playing_song.html' %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% if user.isBlacklisted %}
+<div class="alert alert-danger">You are blacklisted. You cannot upload songs.</div>
+{% else %}
+<form action="/upload_album" method="POST" enctype="multipart/form-data" class="card border-0 shadow-sm p-3 mb-3">
+    <h6 class="text-success mb-3">Create Album</h6>
+    <div class="mb-2">
+        <label class="form-label text-muted small">Album Name</label>
+        <input type="text" class="form-control form-control-sm" name="name" required>
+    </div>
+    <div class="mb-2">
+        <label class="form-label text-muted small">Genre</label>
+        <input type="text" class="form-control form-control-sm" name="genre">
+    </div>
+    <div class="mb-2">
+        <label class="form-label text-muted small">Artist</label>
+        <input type="text" class="form-control form-control-sm" name="artist">
+    </div>
+    <div class="mb-3">
+        <label class="form-label text-muted small">Songs (.mp3, multiple)</label>
+        <input class="form-control form-control-sm" type="file" name="album_files" accept=".mp3" multiple required>
+    </div>
+    <button type="submit" class="btn btn-success btn-sm w-100">Create Album</button>
+</form>
+{% endif %}
